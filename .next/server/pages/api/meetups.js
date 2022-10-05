@@ -88,53 +88,23 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("i4bb");
+module.exports = __webpack_require__("ttU6");
 
 
 /***/ }),
 
-/***/ "i4bb":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var mongodb__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ykE2");
-/* harmony import */ var mongodb__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongodb__WEBPACK_IMPORTED_MODULE_0__);
-
-
-async function handler(req, res) {
-  if (req.method === "POST") {
-    const data = req.body; // const { title, image, address, description } = data; //useless
-
-    const client = await mongodb__WEBPACK_IMPORTED_MODULE_0__["MongoClient"].connect("mongodb+srv://satrio:asdzxc123@cluster0.jp6xvhp.mongodb.net/?retryWrites=true&w=majority");
-    const db = client.db();
-    const meetupsCollection = db.collection("meetups"); //can be different
-
-    const result = await meetupsCollection.insertOne(data);
-    console.log(result);
-    client.close();
-    res.status(201).json({
-      message: "Meetup inserted!"
-    });
-  }
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (handler);
-
-/***/ }),
-
-/***/ "ykE2":
+/***/ "ttU6":
 /***/ (function(module, exports) {
 
-module.exports = require("mongodb");
+
 
 /***/ })
 
