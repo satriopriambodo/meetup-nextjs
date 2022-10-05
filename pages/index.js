@@ -1,4 +1,5 @@
 import MeetupList from "../components/meetups/MeetupList";
+import { MongoClient } from "mongodb";
 
 const DUMMY_MEETUPS = [
   {
@@ -23,11 +24,39 @@ function HomePage(props) {
   return <MeetupList meetups={props.meetups} />;
 }
 
+// export async function getServerSideProps(context) {
+//   const req = context.req;
+//   const res = context.res;
+//   return {
+//     props: {
+//       meetups: DUMMY_MEETUPS,
+//     },
+//   };
+// }
+
 export async function getStaticProps() {
+  // fetch("/api/meetups");
+  const client = await MongoClient.connect(
+    "mongodb+srv://satrio:asdzxc123@cluster0.jp6xvhp.mongodb.net/?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups"); //can be different
+
+  const meetups = await meetupsCollection.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        id: meetup._id.toString(),
+      })),
     },
+    revalidate: 10,
   };
 }
 

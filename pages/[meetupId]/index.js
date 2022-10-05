@@ -9,4 +9,40 @@ function MeetupDetails() {
     />
   );
 }
+
+export function getStaticPaths() {
+  return {
+    fallback: false,
+    paths: [
+      {
+        params: {
+          meetupId: "m1",
+        },
+      },
+      {
+        params: {
+          meetupId: "m2",
+        },
+      },
+    ],
+  };
+}
+
+export function getStaticProps(context) {
+  const meetupId = context.params.meetupId; // refer to fileName
+  console.log(meetupId);
+
+  return {
+    props: {
+      meetupData: {
+        image:
+          "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
+        id: meetupId,
+        address: "Some Street 5, Some City",
+        description: "The meetup description",
+      },
+    },
+  };
+}
+
 export default MeetupDetails;
